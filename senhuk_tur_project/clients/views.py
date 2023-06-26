@@ -37,4 +37,4 @@ def save(request):
     
     clients = Client.objects.all()
     
-    return render(request, 'clients.html', {"clients": clients}) 
+    return render(request, 'clientsList.html', {"clients": clients}) 
