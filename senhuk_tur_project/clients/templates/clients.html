@@ -25,11 +25,11 @@
     <div class="container">
       <h1>Cadastro de Clientes</h1>
       
-        <ul>
+        {% comment %} <ul>
             {% for client in clients %}
                 <li> {{ client.name }}</li>
             {% endfor %}
-        </ul>
+        </ul> {% endcomment %}
 
 
         <form action="{% url 'save' %}" method="post">
@@ -78,6 +78,11 @@
             </div>
 
             <div class="form-group mb-3">
+              <label class="form-label">Observação:</label>
+              <input name="description" class="form-control" type="text" aria-label="default input example">
+            </div>
+
+            {% comment %} <div class="form-group mb-3">
             <label class="form-label">Contato 1:</label>
             <input name="contact_1" class="form-control" type="text" aria-label="default input example">
             </div>
@@ -95,7 +100,7 @@
             <div class="form-group mb-3">
             <label class="form-label">Celular Contato 2:</label>
             <input name="contact_2_mobile" class="form-control" type="text" aria-label="default input example">
-            </div>
+            </div> {% endcomment %}
 
             <button type="submit" class="btn btn-primary">Salvar</button>
 

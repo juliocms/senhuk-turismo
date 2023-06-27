@@ -3,7 +3,7 @@ from .models import Client
 
 def clients(request):
     clients = Client.objects.all()
-    
+  
     return render(request, "clients.html", {"clients": clients})
 
 def save(request):
@@ -13,10 +13,11 @@ def save(request):
     new_user.email = request.POST.get('email')
     new_user.social_number = request.POST.get('social_number')
     new_user.address = request.POST.get('address')
-    new_user.contact_1 = request.POST.get('contact_1')
-    new_user.contact_1_mobile = request.POST.get('contact_1_mobile')
-    new_user.contact_2 = request.POST.get('contact_2')
-    new_user.contact_2_mobile = request.POST.get('contact_2_mobile')
+    # new_user.contact_1 = request.POST.get('contact_1')
+    # new_user.contact_1_mobile = request.POST.get('contact_1_mobile')
+    # new_user.contact_2 = request.POST.get('contact_2')
+    # new_user.contact_2_mobile = request.POST.get('contact_2_mobile')
+    new_user.description = request.POST.get('description')
     new_user.gender = request.POST.get('gender')
     new_user.birth_date = request.POST.get('birth_date')
         

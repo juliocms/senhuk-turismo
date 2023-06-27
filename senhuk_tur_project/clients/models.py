@@ -15,23 +15,20 @@ class Client(models.Model):
     ]
     
     id = models.AutoField(primary_key=True)
-    name = models.TextField(max_length=100)
-    mobile = models.IntegerField()
+    name = models.TextField(max_length=100, null=False)
+    mobile = models.IntegerField(null=False)
     email = models.TextField(max_length=100, null=False, default='DEFAULT VALUE')
-    social_number = models.IntegerField()
-    address = models.TextField(max_length=255)
-    contact_1 = models.TextField(max_length=100)
-    contact_1_mobile = models.IntegerField()
-    contact_2 = models.TextField(max_length=100)
-    contact_2_mobile = models.IntegerField()
+    social_number = models.IntegerField(null=False)
+    address = models.TextField(max_length=255, null=False)
     birth_date = models.DateField(null=True, blank=True)
+    description = models.TextField(max_length=255, null=True, default='DEFAULT VALUE')
     gender = models.CharField(
         max_length=1,
         choices=GENDER_FORM,
         default=NAO_INFORMAR,
+        null=False
     )
-    # gender =  models.TextField(max_length=20)
     
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.mobile}"
     

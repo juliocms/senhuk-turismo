@@ -3,6 +3,6 @@ from django.urls import path, include
 from .views import clients, save
 
 urlpatterns = [
-    path('', clients),
+    path('clients', clients),
     path('save', save, name="save"),
 ]
