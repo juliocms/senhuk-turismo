@@ -8,6 +8,12 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <style>
+      table, th, td {
+        border:2px solid black;
+      }
+    </style>
+
     <title>Cadastro de Clientes</title>
   </head>
   <body>
@@ -24,87 +30,108 @@
     </nav>
     <div class="container">
       <h1>Cadastro de Clientes</h1>
-      
-        {% comment %} <ul>
-            {% for client in clients %}
-                <li> {{ client.name }}</li>
-            {% endfor %}
-        </ul> {% endcomment %}
+   
+        {% if client %}
 
+          <table>
+            <tr>
+              <td>Nome</td>
+              <td>Email</td>
+              <td>Celular</td>
+              <td>CPF</td>
+              <td>Data Nascimento</td>
+              <td>Endereço</td>
+              <td>Gênero</td>
+              <td>Observação</td>
+            </tr>
+            <tr>
+              <td> {{ client.name }}</td>
+              <td> {{ client.email }}</td>
+              <td> {{ client.mobile }}</td>
+              <td> {{ client.social_number }}</td>
+              <td> {{ client.birth_date }}</td>
+              <td> {{ client.address }}</td>
+              <td> {{ client.gender }}</td>
+              <td> {{ client.description }}</td>
+            </tr>
+          </table>
+        {% else %}
 
-        <form action="{% url 'save' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group mb-3">
-            <label class="form-label">Nome:</label>
-            <input name="name" class="form-control" type="text" aria-label="default input example">
-            </div>
+          <form action="{% url 'save' %}" method="post">
+              {% csrf_token %}
 
-            <div class="form-group mb-3">
-            <label class="form-label">Celular:</label>
-            <input name="mobile" type="text" class="form-control" data-inputmask="(99) 9 9999-9999" />
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">Nome:</label>
+              <input name="name" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            <div class="mb-3">
-            <label for="InputEmail1" class="form-label">Email:</label>
-            <input name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">Não compartilhe seu email com ninguém.</div>
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">Celular:</label>
+              <input name="mobile" type="text" class="form-control" data-inputmask="(99) 9 9999-9999" />
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">CPF:</label>
-            <input name="social_number" class="form-control" type="text" aria-label="default input example">
-            </div>
+              <div class="mb-3">
+              <label for="InputEmail1" class="form-label">Email:</label>
+              <input name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">Não compartilhe seu email com ninguém.</div>
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">Data de Nascimento</label>
-            <input name="birth_date" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" />
-            <small class="text-muted">e.g "DD/MM/YYYY"</small>
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">CPF:</label>
+              <input name="social_number" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">Genero:</label>
-            <select name="gender" class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="M">Masculino</option>
-                <option value="F">Feminino</option>
-                <option value="O">Outros</option>
-                <option value="N">Não Informar</option>
-            </select>
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">Data de Nascimento</label>
+              <input name="birth_date" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" />
+              <small class="text-muted">e.g "DD/MM/YYYY"</small>
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">Endereço:</label>
-            <input name="address" class="form-control" type="text" aria-label="default input example">
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">Genero:</label>
+              <select name="gender" class="form-select" aria-label="Default select example">
+                  <option selected>Open this select menu</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Feminino</option>
+                  <option value="O">Outros</option>
+                  <option value="N">Não Informar</option>
+              </select>
+              </div>
 
-            <div class="form-group mb-3">
-              <label class="form-label">Observação:</label>
-              <input name="description" class="form-control" type="text" aria-label="default input example">
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">Endereço:</label>
+              <input name="address" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            {% comment %} <div class="form-group mb-3">
-            <label class="form-label">Contato 1:</label>
-            <input name="contact_1" class="form-control" type="text" aria-label="default input example">
-            </div>
+              <div class="form-group mb-3">
+                <label class="form-label">Observação:</label>
+                <input name="description" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">Celular Contato 1:</label>
-            <input name="contact_1_mobile" class="form-control" type="text" aria-label="default input example">
-            </div>
+              {% comment %} <div class="form-group mb-3">
+              <label class="form-label">Contato 1:</label>
+              <input name="contact_1" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">Contato 2:</label>
-            <input name="contact_2" class="form-control" type="text" aria-label="default input example">
-            </div>
+              <div class="form-group mb-3">
+              <label class="form-label">Celular Contato 1:</label>
+              <input name="contact_1_mobile" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            <div class="form-group mb-3">
-            <label class="form-label">Celular Contato 2:</label>
-            <input name="contact_2_mobile" class="form-control" type="text" aria-label="default input example">
-            </div> {% endcomment %}
+              <div class="form-group mb-3">
+              <label class="form-label">Contato 2:</label>
+              <input name="contact_2" class="form-control" type="text" aria-label="default input example">
+              </div>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
+              <div class="form-group mb-3">
+              <label class="form-label">Celular Contato 2:</label>
+              <input name="contact_2_mobile" class="form-control" type="text" aria-label="default input example">
+              </div> {% endcomment %}
 
-        </form>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+
+          </form>
+        {% endif %} 
 
     </div>
 

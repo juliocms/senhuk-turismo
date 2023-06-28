@@ -32,7 +32,7 @@
       
       {% if user.is_authenticated %}
 
-        <h1>Bem-Vindo {{ user.username }} ao Senhuk Turismo</h1>
+        <h1>Bem-Vindo {{ user.username }} ao Senhuk Turismo {{ user.email }}</h1>
 
       {% else %}
         <h1>Por favor, entre com seu login</h1>
