@@ -51,52 +51,58 @@
             <td> {{ travel.vehicle_plate }}</td>
             <td> {{ travel.date_departure }}</td>
             <td> {{ travel.date_arrival }}</td>
+            <td>
+              <form action="{% url 'delete' travel.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary btn-sm" type="submit">Excluir</button>
+              </form>
+            </td>
           </tr>
           {% endfor %}
         </table>
         <br/><br/><br/>
 
-          <form action="{% url 'save' %}" method="post">
-              {% csrf_token %}
+        <form action="{% url 'save' %}" method="post">
+            {% csrf_token %}
 
-              <div class="form-group mb-3">
-                <label class="form-label">Guia Responsável:</label>
-                <input name="responsible_guide" class="form-control" type="text" aria-label="default input example">
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Guia Responsável:</label>
+              <input name="responsible_guide" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-              <div class="form-group mb-3">
-                <label class="form-label">Partida / Destino:</label>
-                <input name="departure_destination" type="text" class="form-control" />
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Partida / Destino:</label>
+              <input name="departure_destination" type="text" class="form-control" />
+            </div>
 
-              <div class="form-group mb-3">
-                <label class="form-label">Observação:</label>
-                <textarea name="description" class="form-control" placeholder="Informe mais detalhes sobre sua encomenda" id="floatingTextarea"></textarea>
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Observação:</label>
+              <textarea name="description" class="form-control" placeholder="Informe mais detalhes sobre sua encomenda" id="floatingTextarea"></textarea>
+            </div>
 
-              <div class="form-group mb-3">
-                <label class="form-label">Tipo de Viagem:</label>
-                <input name="type" placeholder="Ex: Negócios, Turismo, Shows" class="form-control" type="text" aria-label="default input example">
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Tipo de Viagem:</label>
+              <input name="type" placeholder="Ex: Negócios, Turismo, Shows" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-              <div class="form-group mb-3">
-                <label class="form-label">Placa do Veículo</label>
-                <input name="vehicle_plate" type="text" class="form-control" />
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Placa do Veículo</label>
+              <input name="vehicle_plate" type="text" class="form-control" />
+            </div>
 
-              <div class="form-group mb-3">
-                <label class="form-label">Data da Saída:</label>
-                <input name="date_departure" class="form-control" type="text" aria-label="default input example">
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Data da Saída:</label>
+              <input name="date_departure" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-              <div class="form-group mb-3">
-                <label class="form-label">Data da Chegada:</label>
-                <input name="date_arrival" class="form-control" type="text" aria-label="default input example">
-              </div>
+            <div class="form-group mb-3">
+              <label class="form-label">Data da Chegada:</label>
+              <input name="date_arrival" class="form-control" type="text" aria-label="default input example">
+            </div>
 
-              <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
 
-          </form>
+        </form>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

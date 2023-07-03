@@ -1,17 +1,18 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, reverse
 from .models import Travel
 from django.shortcuts import redirect
 
 @login_required(login_url="/accounts/login")
 def travels(request):
         
-        if request.user.is_superuser:
-            travels = Travel.objects.all().order_by('date_departure').values()
-            travels = travels[:5]
-            return render(request, "travels.html", {"travels": travels})
-        else:
-            return redirect("/accounts/login/")    
+    if request.user.is_superuser:
+        travels = Travel.objects.all().order_by('-date_departure').values()
+        travels = travels[:5]
+        return render(request, "travels.html", {"travels": travels})
+    else:
+        return redirect("/accounts/login/")
 
 
 @login_required(login_url="/accounts/login")
@@ -27,6 +28,17 @@ def save(request):
         
     new_travel.save()
     
-    travels = Travel.objects.all()
+    travels = Travel.objects.all().order_by('-date_departure').values()
+    travels = travels[:5]
+    
+    return render(request, 'travels.html', {"travels": travels})
+
+@login_required(login_url="/accounts/login")
+def delete(request, travel_id):
+    travel = Travel.objects.get(pk=travel_id)
+    travel.delete()
+        
+    travels = Travel.objects.all().order_by('-date_departure').values()
+    travels = travels[:5]
     
     return render(request, 'travels.html', {"travels": travels}) 
