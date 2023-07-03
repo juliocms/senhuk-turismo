@@ -22,9 +22,14 @@
         </form>
         <span class="navbar-brand mb-0 h1">Encomendas</span>
         <span class="navbar-brand mb-0 h1">Malas</span>
-        <span class="navbar-brand mb-0 h1">Viagens</span>
-        <span class="navbar-brand mb-0 h1">Contrato</span>
-        </form>
+        {% if user.is_superuser %}
+          <form action="{% url 'travels' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Viagens</button>
+          </form>
+          <span class="navbar-brand mb-0 h1">Contrato</span>
+          </form>
+        {% endif %}
       </div>
     </nav>
 

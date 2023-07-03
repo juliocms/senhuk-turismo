@@ -15,11 +15,7 @@ def login(request):
         
         if user:
             login_django(request, user)
-            # return HttpResponse("autenticado")
-        
             return redirect('/')
-            # return render(request, 'login.html') 
-            # return HttpResponseRedirect(request, '/clients/')
         else:
             return redirect("/accounts/login/")
           
