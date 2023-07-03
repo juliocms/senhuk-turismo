@@ -9,7 +9,7 @@ def travels(request):
         
     if request.user.is_superuser:
         travels = Travel.objects.all().order_by('-date_departure').values()
-        travels = travels[:5]
+        travels = travels[:8]
         return render(request, "travels.html", {"travels": travels})
     else:
         return redirect("/accounts/login/")
@@ -29,16 +29,16 @@ def save(request):
     new_travel.save()
     
     travels = Travel.objects.all().order_by('-date_departure').values()
-    travels = travels[:5]
+    travels = travels[:8]
     
     return render(request, 'travels.html', {"travels": travels})
 
 @login_required(login_url="/accounts/login")
-def delete(request, travel_id):
+def delete_travel(request, travel_id):
     travel = Travel.objects.get(pk=travel_id)
     travel.delete()
         
     travels = Travel.objects.all().order_by('-date_departure').values()
-    travels = travels[:5]
+    travels = travels[:]
     
     return render(request, 'travels.html', {"travels": travels}) 

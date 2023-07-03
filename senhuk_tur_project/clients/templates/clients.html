@@ -24,8 +24,11 @@
         </div>
         <span class="navbar-brand mb-0 h1">Encomendas</span>
         <span class="navbar-brand mb-0 h1">Malas</span>
-        <span class="navbar-brand mb-0 h1">Viagens</span>
+        {% if user.is_superuser %}
+          <button onclick="location.href = '/travels/';" class="btn btn-lg btn-primary btn-block" type="submit">Viagens</button>
+        {% endif %}
         <span class="navbar-brand mb-0 h1">Contrato</span>
+        <button onclick="location.href = '/accounts/logout/';" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
       </div>
     </nav>
     <div class="container">
@@ -35,6 +38,7 @@
 
           <table>
             <tr>
+              <td>Id</td>
               <td>Nome</td>
               <td>Email</td>
               <td>Celular</td>
@@ -45,6 +49,7 @@
               <td>Observação</td>
             </tr>
             <tr>
+              <td> {{ client.id }}</td>
               <td> {{ client.name }}</td>
               <td> {{ client.email }}</td>
               <td> {{ client.mobile }}</td>
@@ -53,11 +58,17 @@
               <td> {{ client.address }}</td>
               <td> {{ client.gender }}</td>
               <td> {{ client.description }}</td>
+              <td>
+                <form action="{% url 'delete_user' user.id %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-primary btn-sm" type="submit">Excluir</button>
+                </form>
+              </td>
             </tr>
           </table>
         {% else %}
 
-          <form action="{% url 'save' %}" method="post">
+          <form action="{% url 'save_user' %}" method="post">
               {% csrf_token %}
 
               <div class="form-group mb-3">
@@ -107,26 +118,6 @@
                 <label class="form-label">Observação:</label>
                 <input name="description" class="form-control" type="text" aria-label="default input example">
               </div>
-
-              {% comment %} <div class="form-group mb-3">
-              <label class="form-label">Contato 1:</label>
-              <input name="contact_1" class="form-control" type="text" aria-label="default input example">
-              </div>
-
-              <div class="form-group mb-3">
-              <label class="form-label">Celular Contato 1:</label>
-              <input name="contact_1_mobile" class="form-control" type="text" aria-label="default input example">
-              </div>
-
-              <div class="form-group mb-3">
-              <label class="form-label">Contato 2:</label>
-              <input name="contact_2" class="form-control" type="text" aria-label="default input example">
-              </div>
-
-              <div class="form-group mb-3">
-              <label class="form-label">Celular Contato 2:</label>
-              <input name="contact_2_mobile" class="form-control" type="text" aria-label="default input example">
-              </div> {% endcomment %}
 
               <button type="submit" class="btn btn-primary">Salvar</button>
 

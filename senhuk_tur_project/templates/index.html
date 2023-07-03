@@ -30,6 +30,11 @@
           <span class="navbar-brand mb-0 h1">Contrato</span>
           </form>
         {% endif %}
+        {% if user.is_authenticated %}
+          <button onclick="location.href = '/accounts/logout/';" class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+        {% else %}
+          <button onclick="location.href = '/accounts/login/';" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        {% endif %}
       </div>
     </nav>
 

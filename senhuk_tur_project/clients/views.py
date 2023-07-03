@@ -1,31 +1,22 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Client
-from django.contrib.auth.models import User
 
 @login_required(login_url="/accounts/login")
 def clients(request):
-    # print(request.user.email)
-    
     current_user_email = request.user.email
     client = Client.objects.filter(email=current_user_email).values_list()
     
+    print(client)
+    
     if client:
-        
         client_user = assignment_client(client)
-        # print(client_user)
-       
         return render(request, "clients.html", {"client": client_user})
     else:
         return render(request, "clients.html")
-    # clients = Client.objects.all()
-    # print(clients)
-        
-  
-    # return render(request, "clients.html")#, {"clients": clients})
 
 @login_required(login_url="/accounts/login")
-def save(request):
+def save_user(request):
     new_user = Client()
     new_user.name = request.POST.get('name')
     new_user.mobile = request.POST.get('mobile')
@@ -38,9 +29,16 @@ def save(request):
         
     new_user.save()
     
-    clients = Client.objects.all()
+    current_user_email = request.user.email
+    client = Client.objects.filter(email=current_user_email).values_list()
     
-    return render(request, 'clientsList.html', {"clients": clients}) 
+    print(client)
+    
+    if client:
+        client_user = assignment_client(client)
+        return render(request, "clients.html", {"client": client_user})
+    else:
+        return render(request, "clients.html")
 
 def assignment_client(object):
     new_object = {
@@ -58,5 +56,17 @@ def assignment_client(object):
     
     return new_object
     
-# [(1, 'Jean Jarre25', 31974185296, 'jarrejean25@gmail.com', 95115978741, 'Rua A, 10', 
-# datetime.date(1987, 10, 22), 'Possiveis contatos joao 31 9 5554-3333', 'M')]>
+@login_required(login_url="/accounts/login")
+def delete_user(request, user_id):
+    
+    client = Client.objects.get(pk=user_id)
+    client.delete()
+        
+    current_user_email = request.user.email
+    client = Client.objects.filter(email=current_user_email).values_list()
+    
+    if client:
+        client_user = assignment_client(client)
+        return render(request, "clients.html", {"client": client_user})
+    else:
+        return render(request, "clients.html")
