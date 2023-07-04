@@ -20,6 +20,7 @@ from django.views.generic import TemplateView
 from .views import login
 from clients.views import clients
 from travels.views import travels
+from orders.views import orders
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="index.html")),
@@ -28,10 +29,12 @@ urlpatterns = [
     path('clients/', include('clients.urls'), name='clients' ),
     path('accounts/', include('allauth.urls')),
     path('travels/', include('travels.urls'), name='travels' ),
+    path('orders/', include('orders.urls'), name='orders' ),
     
     path('login', login, name="login"),
     path('clients/', clients, name="clients"),
     path('travels/', travels, name="travels"),
+    path('orders/', orders, name="orders"),
     
         
 ]

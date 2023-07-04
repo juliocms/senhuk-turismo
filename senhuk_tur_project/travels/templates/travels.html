@@ -19,11 +19,8 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <form action="{% url 'clients' %}" method="post">
-          {% csrf_token %}
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Clientes</button>
-        </form>
-        <span class="navbar-brand mb-0 h1">Encomendas</span>
+        <button onclick="location.href = '/clients/';" class="btn btn-lg btn-primary btn-block" type="submit">Clientes</button>
+        <button onclick="location.href = '/orders/';" class="btn btn-lg btn-primary btn-block" type="submit">Encomendas</button>
         <span class="navbar-brand mb-0 h1">Malas</span>
         <div class="shadow-lg p-3 mb-5 bg-body rounded">
           <span class="navbar-brand mb-0 h1">Viagens</span>

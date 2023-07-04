@@ -17,11 +17,11 @@ class Client(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.TextField(max_length=100, null=False)
     mobile = models.IntegerField(null=False)
-    email = models.TextField(max_length=100, null=False, default='DEFAULT VALUE')
+    email = models.TextField(max_length=100, null=False)
     social_number = models.IntegerField(null=False)
     address = models.TextField(max_length=255, null=False)
     birth_date = models.DateField(null=True, blank=True)
-    description = models.TextField(max_length=255, null=True, default='DEFAULT VALUE')
+    description = models.TextField(max_length=255, null=True)
     gender = models.CharField(
         max_length=1,
         choices=GENDER_FORM,

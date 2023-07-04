@@ -7,8 +7,6 @@ def clients(request):
     current_user_email = request.user.email
     client = Client.objects.filter(email=current_user_email).values_list()
     
-    print(client)
-    
     if client:
         client_user = assignment_client(client)
         return render(request, "clients.html", {"client": client_user})
@@ -31,8 +29,6 @@ def save_user(request):
     
     current_user_email = request.user.email
     client = Client.objects.filter(email=current_user_email).values_list()
-    
-    print(client)
     
     if client:
         client_user = assignment_client(client)

@@ -22,7 +22,7 @@
         <div class="shadow-lg p-3 mb-5 bg-body rounded">
           <span class="navbar-brand mb-0 h1">Clientes</span>
         </div>
-        <span class="navbar-brand mb-0 h1">Encomendas</span>
+        <button onclick="location.href = '/orders/';" class="btn btn-lg btn-primary btn-block" type="submit">Encomendas</button>
         <span class="navbar-brand mb-0 h1">Malas</span>
         {% if user.is_superuser %}
           <button onclick="location.href = '/travels/';" class="btn btn-lg btn-primary btn-block" type="submit">Viagens</button>
